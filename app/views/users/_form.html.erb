@@ -22,14 +22,16 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_digest %>
-    <%= f.text_field :password_digest %>
+    <%= f.label :password, "パスワード" %><br>
+    <%= f.password_field :password %>
   </div>
 
   <div class="field">
-    <%= f.label :administrator %>
-    <%= f.check_box :administrator %>
+    <%= f.label :password_confirmation, "パスワード再入力" %><br>
+    <%= f.password_field :password_confirmation %>
   </div>
+
+  
 
   <div class="field">
     <%= f.label :berthday %>

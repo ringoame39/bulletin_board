@@ -18,13 +18,17 @@ class UsersController < ApplicationController
   end
 
   def sign_in
+    render 'users/sign_in'
   end
 
   def user_login
-    puts "&" * 20
-    p params
-    puts "%" * 20
-    redirect_to :root
+    user = User.find_by(name: params[:name])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to :root
+    else
+        render :text => "UserNameまたはパスワードが違います"
+    end
   end
 
   # GET /users/1/edit
@@ -79,6 +83,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :nickname, :password_digest, :administrator, :berthday)
+      params.require(:user).permit(:name, :nickname, :password_digest, :administrator, :password, :password_confirmation, :berthday)
     end
 end
