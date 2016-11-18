@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
-  
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -15,6 +15,16 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+  end
+
+  def sign_in
+  end
+
+  def user_login
+    puts "&" * 20
+    p params
+    puts "%" * 20
+    redirect_to :root
   end
 
   # GET /users/1/edit

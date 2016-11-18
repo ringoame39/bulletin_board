@@ -1,0 +1,7 @@
+<%= form_tag("/user_login", method: "post") do %>
+  <%= label_tag(:name, "UserName:") %>
+  <%= text_field_tag(:name) %>
+  <%= label_tag(:password, "password") %>
+  <%= password_field_tag(:password) %>
+  <%= submit_tag("Login!") %>
+<% end %>
