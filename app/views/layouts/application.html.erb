@@ -10,6 +10,25 @@
 
   <body>
     <%= yield %>
-    <%= link_to "home", root_path %>
+    <div style="position: absolute;
+  top: 0;"
+
+
+    <div style="text-align : left">
+    <span style="color : Aqua">
+      <div style="background-color : Yellow">
+      <span style="font : italic 900 30pt 'ヒラギノ丸ゴ ProN W4'" >けーじばん。</span>
+      </span>
+    </div>
+
+
+    <div style="margin-left : 1150px">
+      <%= link_to 'rooms', rooms_path %>
+      <%= link_to 'users', users_path %>
+      <%= link_to "signin", sign_in_path %>
+      <%= link_to "home", root_path %>
+    </div>
+    </div>
+</div>
   </body>
 </html>
