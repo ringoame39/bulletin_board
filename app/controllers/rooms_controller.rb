@@ -60,7 +60,18 @@ class RoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+def join_room
+  ur = UserRoom.find_by(user_id: session[:user_id],room_id: params[:format])
+unless ur
+  userroom = UserRoom.create(
+  user_id: session[:user_id],
+  room_id: params[:format])
+  @room = userroom.room
+else
+  @room = ur.room
+end
+render 'show'
+end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
