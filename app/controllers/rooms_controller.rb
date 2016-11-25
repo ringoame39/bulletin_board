@@ -10,6 +10,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+    @chats = Room.find_by(id: params[:format]).chats
   end
 
   # GET /rooms/new
@@ -21,11 +22,16 @@ class RoomsController < ApplicationController
   def edit
   end
 
+  def chat
+     @chat = Chat.create(message: params[:messagebox])
+     RoomChat.create(room_id: params[:room_id], chat: @chat)
+     redirect_to :back
+  end
+
   # POST /rooms
   # POST /rooms.json
   def create
     @room = Room.new(room_params)
-
     respond_to do |format|
       if @room.save
         format.html { redirect_to @room, notice: 'Room was successfully created.' }
@@ -60,18 +66,20 @@ class RoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
-def join_room
+  def join_room
   ur = UserRoom.find_by(user_id: session[:user_id],room_id: params[:format])
-unless ur
-  userroom = UserRoom.create(
-  user_id: session[:user_id],
-  room_id: params[:format])
-  @room = userroom.room
-else
-  @room = ur.room
-end
-render 'show'
-end
+    unless ur
+      userroom = UserRoom.create(
+        user_id: session[:user_id],
+        room_id: params[:format])
+      @room = userroom.room
+      @chats = Room.find_by(id: params[:format]).chats
+    else
+      @room = ur.room
+      @chats = Room.find_by(id: params[:format]).chats
+    end
+    render 'show'
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room

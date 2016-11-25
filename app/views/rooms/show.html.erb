@@ -1,19 +1,11 @@
-<p id="notice"><%= notice %></p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<%= form_tag("/message", method: "post") do %>
+  <%= hidden_field_tag(:room_id, @room.id) %>
+  <%= label_tag(:messagebox, "messagebox") %>
+  <%= text_field_tag(:messagebox) %>
+  <%= submit_tag("send") %>
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @room.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @room.description %>
-</p>
-
-<p>
-  <strong>Icon:</strong>
-  <%= @room.icon %>
-</p>
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<% @chats.each do |chat| %>
+  <%= chat.message %>
+<% end %>
