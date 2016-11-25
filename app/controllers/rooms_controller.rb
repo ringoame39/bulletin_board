@@ -10,7 +10,11 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
-    @chats = Room.find_by(id: params[:format]).chats
+    if params[:id]
+      @chats = search_chats(params[:id])
+    else
+      @chats = search_chats(params[:format])
+    end
   end
 
   # GET /rooms/new
@@ -81,6 +85,10 @@ class RoomsController < ApplicationController
     render 'show'
   end
   private
+
+    def search_chats(id)
+      return Room.find_by(id: id).chats
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
