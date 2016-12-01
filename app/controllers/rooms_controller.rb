@@ -17,6 +17,11 @@ class RoomsController < ApplicationController
     end
   end
 
+  def chat_delete
+    RoomChat.where(room_id: params[:room_id], chat_id: params[:message_id]).destroy_all
+    redirect_to Room.find_by(id: params[:room_id])
+  end
+
   # GET /rooms/new
   def new
     @room = Room.new
